@@ -1,6 +1,6 @@
 # canvas-app
 
-[![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
+[![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
 
 The Easy Bake Oven of canvas rendering. Sets up a canvas for 2D or WebGL context, handling a few things like:
 
