@@ -9,6 +9,7 @@ The Easy Bake Oven of canvas rendering. Sets up a canvas for 2D or WebGL context
 - resizes the canvas to full-screen on resize & device orientation change (by default)
 - basic delta time calculation
 - start/stop handling
+- current FPS
 
 Simplest use might look like this:
 
@@ -17,6 +18,8 @@ Simplest use might look like this:
 function render(context, width, height, dt) {
 	context.clearRect(0, 0, width, height);
 	context.fillRect(0, 0, 25, 25);
+
+	context.fillText("FPS: "+this.fps, 20, 20);
 }
 
 //defaults to a full-screen canvas

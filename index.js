@@ -64,6 +64,11 @@ function CanvasApp(render, options) {
     this._lastFrame = null;
     this._then = Date.now();
 
+    //FPS counter
+    this.fps = 60;
+    this._frames = 0;
+    this._prevTime = this._then;
+
     if (!this._ignoreResize) {
         window.addEventListener("resize", function() {
             this.resize(window.innerWidth, window.innerHeight);
@@ -84,6 +89,14 @@ function CanvasApp(render, options) {
     this.renderOnce = function() {
         var now = Date.now();
         var dt = (now-this._then);
+
+        this._frames++;
+        if (now > this._prevTime + 1000) {
+            this.fps = Math.round((this._frames * 1000) / (now - this._prevTime));
+
+            this._prevTime = now;
+            this._frames = 0;
+        }
 
         if (!this.isWebGL) {
             this.context.save();
@@ -114,6 +127,26 @@ function CanvasApp(render, options) {
     }
 }
 
+Object.defineProperty(CanvasApp.prototype, 'retinaEnabled', {
+
+    set: function(v) {
+        this._retina = v;
+        this._DPR = this._retina ? (window.devicePixelRatio||1) : 1;
+        this.resize(this.width, this.height);
+    },
+
+    get: function() {
+        return this._retina;
+    }
+});
+
+CanvasApp.prototype.resetFPS = function() {
+    this._frames = 0;
+    this._prevTime = Date.now();
+    this._then = this._prevTime;
+    this.fps = 60;
+};
+
 CanvasApp.prototype.start = function() {
     if (this.running)
         return;
@@ -121,8 +154,10 @@ CanvasApp.prototype.start = function() {
     if (this._lastFrame) 
         cancelAnimationFrame(this._lastFrame);
 
+    //reset FPS counter
+    this.resetFPS();
+
     this.running = true;
-    this._then = Date.now();
     this._lastFrame = requestAnimationFrame(this._renderHandler);
 };
 
