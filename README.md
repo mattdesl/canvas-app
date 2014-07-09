@@ -17,7 +17,7 @@ Simplest use might look like this:
 //a simple render loop
 function render(context, width, height, dt) {
 	context.clearRect(0, 0, width, height);
-	context.fillRect(0, 0, 25, 25);
+	context.fillRect(20, 50, 25, 25);
 
 	context.fillText("FPS: "+this.fps, 20, 20);
 }
