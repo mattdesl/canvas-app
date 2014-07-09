@@ -80,7 +80,7 @@ function CanvasApp(render, options) {
     }
 
     if (typeof render === "function") {
-        this.onRender = render;   
+        this.onRender = render.bind(this);   
     } else {
         //dummy render function
         this.onRender = function (context, width, height, dt) { };

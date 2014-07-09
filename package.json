@@ -9,6 +9,7 @@
     "webgl-context": "^1.2.1"
   },
   "devDependencies": {
+    "domready": "^1.0.5",
     "tape": "~2.13.2"
   },
   "scripts": {
