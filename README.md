@@ -86,6 +86,10 @@ canvasApp(options);
 - `width`, `height` the current size, not scaled by devicePixelRatio
 - `running` whether the loop is currently running
 
+### context scaling / viewport
+
+Before rendering, the 2d context is scaled to the device size (or the scale remains unchanged if `retina` was false). If the context is `"webgl"`, then instead `gl.viewport` will be called with the device size. 
+
 ## License
 
 MIT, see [LICENSE.md](http://github.com/mattdesl/canvas-app/blob/master/LICENSE.md) for details.
