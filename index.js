@@ -1,4 +1,6 @@
 var getGL = require('webgl-context');
+var debounce = require('debounce');
+var addEvent = require('add-event-listener');
 
 function CanvasApp(render, options) {
     if (!(this instanceof CanvasApp))
@@ -70,11 +72,13 @@ function CanvasApp(render, options) {
     this._prevTime = this._then;
 
     if (!this._ignoreResize) {
-        window.addEventListener("resize", function() {
+        options.resizeDebounce = typeof options.resizeDebounce === 'number'
+                    ? options.resizeDebounce : 50;
+        addEvent(window, "resize", debounce(function() {
             this.resize(window.innerWidth, window.innerHeight);
-        }.bind(this));
+        }.bind(this), options.resizeDebounce, false));
 
-        window.addEventListener("orientationchange", function() {
+        addEvent(window, "orientationchange", function() {
             this.resize(window.innerWidth, window.innerHeight);
         }.bind(this));
     }

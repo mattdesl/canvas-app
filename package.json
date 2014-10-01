@@ -6,6 +6,8 @@
   "license": "MIT",
   "author": "Matt DesLauriers <dave.des@gmail.com>",
   "dependencies": {
+    "add-event-listener": "0.0.1",
+    "debounce": "^1.0.0",
     "webgl-context": "^1.2.1"
   },
   "devDependencies": {
