@@ -71,6 +71,7 @@ canvasApp(options);
 - `contextAttributes` passed to the getContext call
 - `onResize` a function called on resize with arguments `width, height`
 - `onRender` a function called on render with arguments `context, width, height, deltaTime` (can instead be passed as first argument to the constructor)
+- `resizeDebounce` if we are using built-in resize handlers, they will be debounced by 50 ms unless you specify a value explicitly here
 
 ### methods
 
