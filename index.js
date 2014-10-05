@@ -4,7 +4,7 @@ var debounce = require('debounce');
 var addEvent = require('add-event-listener');
 
 function isCanvasContext(obj) {
-    var ctx2d = typeof CanvasRenderingContext !== 'undefined' && obj instanceof CanvasRenderingContext;
+    var ctx2d = typeof CanvasRenderingContext2D !== 'undefined' && obj instanceof CanvasRenderingContext2D;
     return obj && (ctx2d || isGL(obj));
 }
 

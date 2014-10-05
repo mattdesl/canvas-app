@@ -8,7 +8,7 @@ require('domready')(function() {
 
     //append to DOM
     document.body.appendChild( app.canvas );
-    
+
     //start render loop
     app.start();
 });
