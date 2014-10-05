@@ -1,6 +1,12 @@
+var isGL = require('is-webgl-context');
 var getGL = require('webgl-context');
 var debounce = require('debounce');
 var addEvent = require('add-event-listener');
+
+function isCanvasContext(obj) {
+    var ctx2d = typeof CanvasRenderingContext !== 'undefined' && obj instanceof CanvasRenderingContext;
+    return obj && (ctx2d || isGL(obj));
+}
 
 function CanvasApp(render, options) {
     if (!(this instanceof CanvasApp))
@@ -30,27 +36,41 @@ function CanvasApp(render, options) {
     var DPR = options.retina ? (window.devicePixelRatio||1) : 1; 
 
     //setup the canvas
-    var canvas = options.canvas || document.createElement("canvas");
+    var canvas,
+        context,
+        attribs = options.contextAttributes||{};
+
+    this.isWebGL = false;
+
+    //if user provided a context object
+    if (isCanvasContext(options.context)) {
+        context = options.context;
+        canvas = context.canvas;
+    }
+
+    //otherwise allow for a string to set one up
+    if (!canvas)
+        canvas = options.canvas || document.createElement("canvas");
+
     canvas.width = options.width * DPR;
     canvas.height = options.height * DPR;
+
+    if (!context) {
+        if (options.context === "webgl" || options.context === "experimental-webgl") {
+            context = getGL({ canvas: canvas, attributes: attribs });
+            if (!context) {
+                throw "WebGL Context Not Supported -- try enabling it or using a different browser";
+            }
+        } else {
+            context = canvas.getContext(options.context||"2d", attribs);
+        }
+    }
+
+    this.isWebGL = isGL(context);
 
     if (options.retina) {
         canvas.style.width = options.width + 'px';
         canvas.style.height = options.height + 'px';
-    }
-
-    var context,
-        attribs = options.contextAttributes||{};
-
-    this.isWebGL = false;
-    if (options.context === "webgl" || options.context === "experimental-webgl") {
-        context = getGL({ canvas: canvas, attributes: attribs });
-        if (!context) {
-            throw "WebGL Context Not Supported -- try enabling it or using a different browser";
-        }
-        this.isWebGL = true;
-    } else {
-        context = canvas.getContext(options.context||"2d", attribs);
     }
 
     this.running = false;

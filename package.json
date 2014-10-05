@@ -8,11 +8,14 @@
   "dependencies": {
     "add-event-listener": "0.0.1",
     "debounce": "^1.0.0",
+    "is-webgl-context": "^1.0.0",
     "webgl-context": "^1.2.1"
   },
   "devDependencies": {
     "domready": "^1.0.5",
-    "tape": "~2.13.2"
+    "gl-clear": "0.0.1",
+    "tape": "~2.13.2",
+    "webgl-context": "^1.2.1"
   },
   "scripts": {
     "test": "tape test.js"

@@ -73,6 +73,8 @@ canvasApp(options);
 - `onRender` a function called on render with arguments `context, width, height, deltaTime` (can instead be passed as first argument to the constructor)
 - `resizeDebounce` if we are using built-in resize handlers, they will be debounced by 50 ms unless you specify a value explicitly here
 
+If `context is a WebGLRenderingContext or CanvasRenderingContext, it will be used along with its associated `canvas`. This is useful to avoid consecutive `getContext('webgl')` calls which can interfere with WebGL inspectors. 
+
 ### methods
 
 - `renderOnce()` renders a single frame
