@@ -166,6 +166,20 @@ Object.defineProperty(CanvasApp.prototype, 'retinaEnabled', {
     }
 });
 
+Object.defineProperty(CanvasApp.prototype, 'deviceWidth', {
+
+    get: function() {
+        return this.width * this._DPR;
+    }
+});
+
+Object.defineProperty(CanvasApp.prototype, 'deviceHeight', {
+
+    get: function() {
+        return this.height * this._DPR;
+    }
+});
+
 CanvasApp.prototype.resetFPS = function() {
     this._frames = 0;
     this._prevTime = Date.now();

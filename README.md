@@ -88,10 +88,13 @@ If `context is a WebGLRenderingContext or CanvasRenderingContext, it will be use
 - `context` the 2D or WebGL rendering context
 - `width`, `height` the current size, not scaled by devicePixelRatio
 - `running` whether the loop is currently running
+- `deviceWidth`, `deviceHeight` the actual device height (i.e. size * devicePixelRatio). This is needed for glViewport, glScissor, etc.
 
 ### context scaling / viewport
 
-Before rendering, the 2d context is scaled to the device size (or the scale remains unchanged if `retina` was false). If the context is `"webgl"`, then instead `gl.viewport` will be called with the device size. 
+For 2D contexts, `scale()` is called before rendering based on the deviePixelRatio. For WebGL contexts, `gl.viewport()` is called before rendering with the device size. 
+
+If `retina` is false, the device size will be assumed to be the same as the canvas size. 
 
 ## License
 
