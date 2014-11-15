@@ -85,6 +85,7 @@ function CanvasApp(render, options) {
     this._ignoreResize = options.ignoreResize;
     this._lastFrame = null;
     this._then = Date.now();
+    this.maxDeltaTime = typeof options.maxDeltaTime === 'number' ? options.maxDeltaTime : 1000/24;
 
     //FPS counter
     this.fps = 60;
@@ -112,7 +113,7 @@ function CanvasApp(render, options) {
 
     this.renderOnce = function() {
         var now = Date.now();
-        var dt = Math.min(30, (now-this._then));
+        var dt = Math.min(this.maxDeltaTime, (now-this._then));
 
         this._frames++;
         if (now > this._prevTime + 1000) {
