@@ -112,7 +112,7 @@ function CanvasApp(render, options) {
 
     this.renderOnce = function() {
         var now = Date.now();
-        var dt = (now-this._then);
+        var dt = Math.min(30, (now-this._then));
 
         this._frames++;
         if (now > this._prevTime + 1000) {
