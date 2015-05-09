@@ -2,6 +2,16 @@
 
 [![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
 
+#### deprecation warning
+
+This module is bloated and a little too magical. Instead, some of the following are recommended:
+
+- [canvas-fit-loop](https://www.npmjs.com/package/canvas-fit-loop)
+- [2d-context](https://www.npmjs.com/package/2d-context)
+- [webgl-context](https://www.npmjs.com/package/webgl-context)
+
+---
+
 The Easy Bake Oven of canvas rendering. Sets up a canvas for 2D or WebGL context, handling a few things like:
 
 - CSS scaling for retina displays with a devicePixelRatio of > 1.0
