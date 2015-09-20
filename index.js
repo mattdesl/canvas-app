@@ -127,7 +127,7 @@ function CanvasApp(render, options) {
             this.context.save();
             this.context.scale(this._DPR, this._DPR);
         } else {
-            this.context.viewport(0, 0, this.width * this._DPR, this.height * this._DPR);
+            // this.context.viewport(0, 0, this.width * this._DPR, this.height * this._DPR);
         }
         
         this.onRender(this.context, this.width, this.height, dt);
